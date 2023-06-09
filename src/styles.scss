@@ -123,3 +123,69 @@ body {
     }
   }
 }
+
+.list {
+  margin-top: 4rem;
+
+  .list-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+
+    .table {
+      width: 100%;
+
+      thead {
+        th {
+          white-space: nowrap;
+          padding: 12px;
+          background-color: #f2f2f2;
+        }
+      }
+
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background-color: #f9f9f9;
+          }
+
+          td {
+            padding: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .list {
+    .table-responsive {
+      .table {
+        thead {
+          display: none;
+        }
+
+        tbody {
+          tr {
+            display: block;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+
+            td {
+              display: block;
+              text-align: right;
+              border-bottom: 1px solid #ddd;
+
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

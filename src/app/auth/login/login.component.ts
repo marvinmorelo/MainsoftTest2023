@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent {
   showPassword: boolean = false;
 
 
-  constructor(private formBuilder: FormBuilder, private router:Router) { 
+  constructor(private formBuilder: FormBuilder, private router:Router, private loginService:AuthService) { 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -35,14 +36,26 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log("a qui estoy");  
-    // if (this.loginForm.valid) {    
-    //   // Lógica de autenticación
-    // } else {
+    if (this.loginForm.valid) {
+      const credentials = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      };
 
-    //   // El formulario es inválido, muestra mensajes de error o realiza acciones necesarias
-    // }
-    this.router.navigateByUrl('/company');
+      this.loginService.login(credentials.email, credentials.password).subscribe(
+        (response) => {
+          // Aquí manejo la respuesta exitosa del inicio de sesión
+          console.log('Inicio de sesión exitoso', response);
+          this.router.navigateByUrl('/company/new')
+        },
+        (error) => {
+          // Aquí manejo el error en caso de que falle el inicio de sesión
+          console.error('Error en el inicio de sesión', error);
+          alert('Error en el inicio de sesión')
+          this.router.navigateByUrl('/company/new')
+        }
+      );
+    }
 
   }
 }

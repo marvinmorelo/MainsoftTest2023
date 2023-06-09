@@ -1,34 +1,4 @@
-<!-- <div class="container">
-  <div class="company-list">
-    <h2 class="list-title">Company List</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Address</th>
-          <th>NIT</th>
-          <th>Phone</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let company of companies">
-          <td>{{ company.id }}</td>
-          <td>{{ company.name }}</td>
-          <td>{{ company.address }}</td>
-          <td>{{ company.nit }}</td>
-          <td>{{ company.phone }}</td>
-          <td>
-            <button (click)="editCompany(company.id)">Edit</button>
-            <button (click)="deleteCompany(company.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div> -->
-<div class="company-list">
+<div class="list">
   <h2 class="list-title">Company List</h2>
     <div class="table-responsive">
       <table class="table">
@@ -53,11 +23,11 @@
               <div class="action-buttons">
                 <i
                   class="fa-solid fa-pencil edit-button"
-                  (click)="editCompany(company.id)"
+                  routerLink="/company/{{ company.id }}"
                 ></i>
                 <i
                   class="fa-solid fa-trash-can delete-button"
-                  (click)="deleteCompany(company.id)"
+                  (click)="onDeleteCompany(company.id)"
                 ></i>
               </div>
             </td>

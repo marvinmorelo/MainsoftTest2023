@@ -1,40 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Company } from '../shared/models/company-model';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CompanyService {
-  private companies: Company[] = [
-    { id: 1, name: 'Company 1', address: 'Address 1', nit: 'NIT 1', phone: '123456789' },
-    { id: 2, name: 'Company 2', address: 'Address 2', nit: 'NIT 2', phone: '987654321' },
-    // Agrega más empresas según sea necesario
-  ];
+  apiUrl = environment.apiUrl;
+
+  constructor(private http: HttpClient) {}
 
   getCompanies(): Observable<Company[]> {
-    return of(this.companies);
+    const companiesUrl = `${this.apiUrl}/company/companies`;
+    return this.http.get<Company[]>(companiesUrl);
   }
 
-  getCompanyById(id: number): Observable<Company | undefined> {
-    const company = this.companies.find(c => c.id === id);
-    return of(company);
+  getCompanyById(id: string): Observable<Company> {
+    const companyUrl = `${this.apiUrl}/companies/${id}`;
+    return this.http.get<Company>(companyUrl);
   }
 
-  updateCompany(company: Company): Observable<Company> {
-    const index = this.companies.findIndex(c => c.id === company.id);
-    if (index !== -1) {
-      this.companies[index] = company;
-    }
-    return of(company);
+  createCompany(company: Company): Observable<Company> {
+    const companiesUrl = `${this.apiUrl}/companies`;
+    return this.http.post<Company>(companiesUrl, company);
   }
 
-  deleteCompany(id: number): Observable<boolean> {
-    const index = this.companies.findIndex(c => c.id === id);
-    if (index !== -1) {
-      this.companies.splice(index, 1);
-      return of(true);
-    }
-    return of(false);
+  updateCompany(id: string, data: any): Observable<Company> {
+    const companyUrl = `${this.apiUrl}/companies/${id}`;
+    return this.http.put<Company>(companyUrl, data);
+  }
+
+  deleteCompany(id: string): Observable<void> {
+    const companyUrl = `${this.apiUrl}/companies/${id}`;
+    return this.http.delete<void>(companyUrl);
   }
 }

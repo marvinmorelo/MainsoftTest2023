@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./company/company.module').then((m) => m.CompanyModule),
   },
+  {
+    path: 'product',
+    loadChildren: () =>
+      import('./inventory/inventory.module').then((m) => m.InventoryModule),
+  },
 ];
 // Agrega aquí más rutas para otras páginas de tu aplicación
 @NgModule({

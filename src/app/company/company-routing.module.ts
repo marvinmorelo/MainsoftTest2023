@@ -4,7 +4,8 @@ import { CompanyFormComponent } from './company-form/company-form.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 
 const routes: Routes = [
-  { path: '', component: CompanyFormComponent },
+  { path: 'new', component: CompanyFormComponent },
+  { path: ':id', component: CompanyFormComponent },
   { path: 'companies', component: CompanyListComponent },
 
 

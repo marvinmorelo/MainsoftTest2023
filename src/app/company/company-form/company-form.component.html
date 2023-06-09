@@ -1,10 +1,18 @@
 <div class="form-container">
   <div class="form">
     <h2 class="form-title">New Company</h2>
-    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+    <form
+      [formGroup]="companyForm"
+      (ngSubmit)="id == null ? onSubmitNewCompany() : onUpdateCompany(id)"
+    >
       <div class="form-group">
         <label for="name">Company Name:</label>
-        <input class="input-field" type="text" id="name" formControlName="name" />
+        <input
+          class="input-field"
+          type="text"
+          id="name"
+          formControlName="name"
+        />
         <div
           *ngIf="
           companyForm.get('name')?.touched &&
@@ -17,7 +25,12 @@
       </div>
       <div class="form-group">
         <label for="address">Address:</label>
-        <input class="input-field" type="text" id="address" formControlName="address" />
+        <input
+          class="input-field"
+          type="text"
+          id="address"
+          formControlName="address"
+        />
         <div
           *ngIf="
           companyForm.get('address')?.touched &&
@@ -43,7 +56,12 @@
       </div>
       <div class="form-group">
         <label for="phone">Phone:</label>
-        <input class="input-field" type="text" id="phone" formControlName="phone" />
+        <input
+          class="input-field"
+          type="text"
+          id="phone"
+          formControlName="phone"
+        />
         <div
           *ngIf="
             companyForm.get('phone')?.touched &&
@@ -64,7 +82,9 @@
           </div>
         </div>
       </div>
-      <button class="btn-submit" type="submit">Submit</button>
+      <button class="btn-submit" type="submit">
+        {{ id !== "" || id !== undefined ? "Update" : "Submit" }}
+      </button>
     </form>
   </div>
 </div>

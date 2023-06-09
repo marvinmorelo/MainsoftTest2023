@@ -1,0 +1,70 @@
+<div class="form-container">
+  <div class="form">
+    <h2 class="form-title">New Company</h2>
+    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Company Name:</label>
+        <input class="input-field" type="text" id="name" formControlName="name" />
+        <div
+          *ngIf="
+          companyForm.get('name')?.touched &&
+          companyForm.get('name')?.errors?.['required']
+        "
+          class="error-message"
+        >
+          Company name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input class="input-field" type="text" id="address" formControlName="address" />
+        <div
+          *ngIf="
+          companyForm.get('address')?.touched &&
+          companyForm.get('address')?.errors?.['required']
+        "
+          class="error-message"
+        >
+          Address is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nit">NIT:</label>
+        <input class="input-field" type="text" id="nit" formControlName="nit" />
+        <div
+          *ngIf="
+          companyForm.get('nit')?.touched &&
+          companyForm.get('nit')?.errors?.['required']
+        "
+          class="error-message"
+        >
+          NIT is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input class="input-field" type="text" id="phone" formControlName="phone" />
+        <div
+          *ngIf="
+            companyForm.get('phone')?.touched &&
+            companyForm.get('phone')?.errors
+          "
+        >
+          <div
+            *ngIf="companyForm.get('phone')?.errors?.['required']"
+            class="error-message"
+          >
+            Phone is required
+          </div>
+          <div
+            *ngIf="companyForm.get('phone')?.errors?.['pattern']"
+            class="error-message"
+          >
+            Invalid phone format
+          </div>
+        </div>
+      </div>
+      <button class="btn-submit" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

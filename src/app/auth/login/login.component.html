@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="form-container container">
   <div class="form">
     <h2 class="form-title">Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -9,6 +9,8 @@
           id="email"
           formControlName="email"
           class="input-field"
+          autocomplete="off"
+
         />
         <div
           *ngIf="

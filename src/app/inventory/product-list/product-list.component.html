@@ -1,38 +1,38 @@
-<div class="list">
-    <h2 class="list-title">Product List</h2>
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="d-none d-lg-table-header">
-            <tr>
-              <th>Company</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Description</th>
-              <th>Image Url</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let product of products">
-              <td>{{ product.companyId }}</td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.imageUrl }}</td>
-              <td>
-                <div class="action-buttons">
-                  <i
-                    class="fa-solid fa-pencil edit-button"
-                    routerLink="/product/{{ product.id }}"
-                  ></i>
-                  <i
-                    class="fa-solid fa-trash-can delete-button"
-                    (click)="onDeleteProduct(product.id)"
-                  ></i>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  
+<div class="list container">
+  <h2 class="list-title">Product List</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="d-none d-lg-table-header">
+        <tr>
+          <th>Company</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Image Url</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.companyId }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.imageUrl }}</td>
+          <td>
+            <div class="action-buttons">
+              <i
+                class="fa-solid fa-pencil edit-button"
+                routerLink="/product/{{ product.id }}"
+              ></i>
+              <i
+                class="fa-solid fa-trash-can delete-button"
+                (click)="onDeleteProduct(product.id)"
+              ></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-sidemenu></app-sidemenu>

@@ -82,7 +82,6 @@ describe('CompanyService', () => {
     const companyId = '1';
 
     service.deleteCompany(companyId).subscribe(() => {
-      // Expectations for successful deletion
     });
 
     const req = httpMock.expectOne(`${service.apiUrl}/companies/${companyId}`);
@@ -90,6 +89,5 @@ describe('CompanyService', () => {
     req.flush(null);
   });
 
-  // Add more test cases for other methods as needed
 
 });

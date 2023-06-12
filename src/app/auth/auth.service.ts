@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AuthResponse } from '../shared/models/authResponse-model';
 import { User } from '../shared/models/user-model';
 
 @Injectable({
@@ -15,11 +14,11 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(email: string, password: string): Observable<AuthResponse> {
+  login(username: string, password: string): Observable<any> {
     const loginUrl = `${this.apiUrl}/login`;
-    const loginData = { email, password };
+    const loginData = { username, password };
 
-    return this.http.post<AuthResponse>(loginUrl, loginData).pipe(
+    return this.http.post<any>(loginUrl, loginData).pipe(
       tap((resp) => {
         localStorage.setItem('name', resp.user.name);
         localStorage.setItem('role', resp.user.role);
@@ -35,7 +34,7 @@ export class AuthService {
       localStorage.getItem('token') || ''
     );
 
-    return this.http.get<AuthResponse>(url, { headers }).pipe(
+    return this.http.get<any>(url, { headers }).pipe(
       tap((resp) => {
         if (resp.ok) {
           localStorage.setItem('token', resp.token!);

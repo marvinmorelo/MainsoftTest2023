@@ -15,7 +15,7 @@ export class LoginComponent {
 
   constructor(private formBuilder: FormBuilder, private router:Router, private loginService:AuthService) { 
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', Validators.required]
     });
   }
@@ -30,7 +30,7 @@ export class LoginComponent {
   
   buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
+      username: ["", [Validators.required]],
       password: ['', Validators.required]
     });
   }
@@ -38,21 +38,17 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const credentials = {
-        email: this.loginForm.value.email,
+        username: this.loginForm.value.username,
         password: this.loginForm.value.password
       };
 
-      this.loginService.login(credentials.email, credentials.password).subscribe(
+      this.loginService.login(credentials.username, credentials.password).subscribe(
         (response) => {
-          // Aquí manejo la respuesta exitosa del inicio de sesión
           console.log('Inicio de sesión exitoso', response);
           this.router.navigateByUrl('/home')
         },
         (error) => {
-          // Aquí manejo el error en caso de que falle el inicio de sesión
-          console.error('Error en el inicio de sesión', error);
-          alert('Error en el inicio de sesión')
-          this.router.navigateByUrl('/home')
+          alert('Error en el inicio de sesión'+error)
         }
       );
     }
